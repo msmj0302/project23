@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="content"/>
+<th:block th:replace="~{/fragment/header::setContent(~{this::content}) }"/>
+<head>
+<title>장바구니목록</title>
+<style type="text/css">
+.cartList{
+border: 1px solid gray;
+width: 700px;
+height: 150px;
+margin: auto;
+display: flex;
+border-radius: 1em;
+margin-bottom: 15px;
+}
+.wantSelect{
+margin: auto 0;
+}
+
+.wantSelect>input{
+width: 30px; height: 25px;
+}
+
+.bookingPhoto{
+/* border: solid 1px red;테스트용 */
+text-align: center;
+font-size: 15px;
+margin: auto 0;
+}
+.bookingPhoto>img{
+width: 120px; height: 145px;
+}
+
+.bookinginfo{
+margin-top: auto;
+/*border: solid 1px blak; 테스트용 */
+}
+.bookinginfo>ul{
+/*border: solid 1px blue; 테스트용 */
+list-style:none;
+padding-left: 0px;
+margin-bottom: 0;
+} 
+.bookinginfo li{
+/*border: solid 1px pink; 테스트용*/
+font-size: 13px;
+}
+
+.bookingPrice{
+margin-top: auto;
+margin-left: auto;
+margin-right: 10px;
+font-size: 15px;
+float: right;
+}
+
+
+.cartBtn{
+display: flex;
+margin: 0 auto;
+width: 700px;
+}
+</style>
+</head>
+<meta charset="UTF-8">
+<body>
+
+<!-- 예약내역 한개의 모든 내용을 담는 박스 변수를 이용해서
+예약내역이 여러개일 경우 아래 박스가 복제되어 늘어나도록 해야함 -->
+<div class="allContent" th:if="${#lists.size(list)} > 0" th:each="list : ${list}">
+	
+	<div class="allCheckBox" style="width: 700px;margin: 0 auto;">
+	<input type="checkbox" id="allCheck" name="allCheck" value="${list.no}" style="text-align: left; margin-left: 2px; width: 32px; height: 32px;">
+	</div>
+	
+   <div class="cartList">
+      <!-- 원하는 상품 선택하는 체크박스 -->
+      <div class="wantSelect">
+         <input type="checkbox" name="rowCheck" value="${list.no}">
+      </div>
+      
+      <!-- 장바구니에 담긴 테마를 가져오도록 설계해야함 <img src="@변수명" />-->
+      <div class ="bookingPhoto">
+      <img alt="예약내역이미지" src="../images/concept15.jpg">
+      </div>
+      
+      <!-- 예약상세분류, 예약날짜 -->
+      <div class ="bookinginfo">
+        <ul>
+          <li th:text="${list.themeName}"></li>
+          <li th:text="${list.bookingdatetime}">예약</li>
+         </ul>
+      </div>
+      
+       <!-- 해당테마가격 불러오기 -->
+      <div class ="bookingPrice" th:text="${list.price}">      
+   </div>
+</div>   
+
+
+</div> <!-- 예약정보를 담고있는 div의 끝 -->
+
+<!-- 예약개수와 총 금액 표기란 -->
+<div class="totalPri" style="width: 700px; margin: 0 auto; text-align:center;">
+   <span style="text-align:left; font-size: 15px; width: 340px;  display:inline-block;">총 x건</span>
+   <span style="text-align:right; font-size: 15px; width: 340px; display:inline-block;">합계:price원</span> 
+</div>
+
+<!-- 예약하기버튼 -->
+<div class="cartBtn">
+  <button class="btn btn-danger" type="button" id="booking" name="booking" style="width:500px; margin: 0 auto 0 0;">예약하기</button>
+  <button class="btn btn-secondary del" type="button" id="bookingDel" name="bookingDel" style="width:150px; margin: 0 0 0 auto;" onclick="deleteValue()">삭제하기</button>
+</div>
+
+</body>
+<th:block th:replace="~{/fragment/footer::setContent(~{this::content}) }"/>
+
+
+<!-- 삭제버튼 스크립트 -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	var chkObj = document.getElementsByName("rowCheck");
+	var rowCnt = chkObj.length;
+	
+	$("input[name='allCheck']").click(function(){
+		var chk_listArr = $("input[name='rowCheck']");
+		for (var i=0; i<chk_listArr.length; i++) {
+			chk_listArr[i].checked = this.checked;
+		}
+	});
+	
+	$("input[name='rowCheck']").click(function(){
+		if($("input[name='rowCheck']:checked").length == rowCnt){
+			$("input[name='allCheck']")[0].checked = true;
+		}
+		else{
+			$("input[name='allCheck']")[0].checked = false;
+		}
+	});
+});
+
+function deleteValue(){
+	var url = "remove"; //controller로 보내고자 하는 url
+	var valueArr = new Array();
+	var list = $("input[name='rowCheck']");
+	for(var i = 0; i<list.length; i++){
+		if(list[i].checked){ //선택되어 있으면 배열에 값을 저장함
+			valueArr.push(list[i].value);
+		}
+	}
+	if(valueArr.length==0){
+		alert("선택된 항목이 없습니다.")
+	}else{
+		var chk = confirm("정말 삭제하시겠습니까?");
+		$.ajax({
+			url : "/cartList", //전송 url
+			type : 'POST', //POST 방식
+			traditional : true,
+			data : {
+				valueArr : valueArr //보내고자 하는 data 변수 설정
+			},
+			success: function(jdata){
+				if(jdata = 1){
+					alert("삭제 성공");
+					location.replace("cartList") //list로 페이지 새로고침
+				}
+				else{
+					alert("삭제 실패");
+				}
+			}
+		});
+		
+	}
+	
+}
+
+
+
+
+</script>
+
+</html>
+
+
+
+

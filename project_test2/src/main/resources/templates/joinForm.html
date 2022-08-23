@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/blog/">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+      <title>회원가입</title>
+
+
+<style>
+
+ head{
+top: 0px; 
+}
+html,
+body {
+  width :100%;
+  height: 100%;
+}
+
+body {
+  display: inline-block;
+  align-items: center;
+  padding-top: auto;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+  
+ 
+}
+
+
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+  
+}
+
+.form-signin input[type="text"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.form-member{
+/* margin-top: 6% */
+/*  	position:absolute;
+    left:40%;
+    top:50%;
+    margin-left:-150px;
+    margin-top:-150px;   */
+    margin:25px auto;
+    width:700px;
+    
+}
+
+
+
+
+#loginBtn{
+width: 300px;
+height: 48px;
+}
+
+form .form-control{
+height: 40px;
+}
+
+form .form_box{
+margin-top: 15px;
+display: flex; 
+height: 40px;
+} 
+
+.button3{
+text-align: center;
+height: 40px;
+}
+</style>
+</head>
+<body>
+
+<!-- 회원가입 양식 -->
+<div class="form-member">
+  <form>
+         <h1 class="h3 mb-3 fw-normal" style="text-align: center">회원가입</h1>
+    <!-- 사용자 이름 -->
+    <div class="form_box">
+      <input type="text" class="form-control" id="name" placeholder="*이름입력" required>
+    </div>
+      <font id = "nameCheck-message" size = "2"></font>
+    
+	<!-- id 및 중복확인 id검토 확인 함수가 필요함 -->    
+    <div class="form_box" >
+      <input type="text" class="form-control" id="username" placeholder="*영문,숫자를 조합한 4~16자 ID입력" style="width: 550px;" required >
+      &emsp;&emsp;&nbsp;
+      <input type="button" class="btn btn-secondary" id="idCheck" value="중복확인" style="height: 40px" > <br/>
+      <input type="hidden" id="idCheck-data" value="idUncheck">
+    </div>
+      <font id = "idCheck-message" size = "2"></font>
+    
+	<!-- 비밀번호 입력 및 확인 비밀번호가 조건에 만족하는지 확인에 따른 알림창 함수 필요 -->    
+	<div class="form_box">
+      <input type="password" class="form-control" id="password" placeholder="*영문, 숫자, 특수기호를 조합한 8~20자 비밀번호 입력" required>
+    </div>
+      <font id = "pwdCheck1-message" size = "2"></font>
+	<div class="form_box">
+      <input type="password" class="form-control" id="pwCheck" placeholder="*비밀번호확인" required>
+    </div>
+      <font id = "pwdCheck2-message" size = "2"></font>
+    
+	<!-- email 입력 폼  -->   
+    <div class="form_box" >
+        <input type="text" class="form-control" id="email" name="userEmail" placeholder="이메일 입력">&nbsp;@&nbsp;
+        <input type="text" class="form-control" id="emailAdd" name="userEmail" placeholder="ex) meongCity.com">
+    </div>
+      <font id = "emailCheck-message" size = "2"></font>
+    
+    
+	<!-- 전화번호 입력 폼 /함수설정해서 number받기 -->  
+    <div class="form_box" >
+        <input type="text" class="form-control" id="tNumber1" name="userTel" size="1" maxlength="3" placeholder="010" oninput="changeTNumber1()"> -
+        <input type="text" class="form-control" id="tNumber2" name="userTel" size="3" maxlength="4" placeholder="0000"  oninput="changeTNumber2()"> -
+        <input type="text" class="form-control" id="tNumber3" name="userTel" size="3" maxlength="4" placeholder="0000"  oninput="changeTNumber3()">
+    </div>
+      <font id = "phoneCheck-message" size = "2"></font>
+    
+	<!-- 강아지 이름, 견종 ***+,_버튼을 각각 눌렀을때 입력창이 늘어나고 줄어드는 함수 설정할 필요 있음*** 그에 따른 id는 dog+i, dType+i-->  
+    <div class="form_box" >
+        <input type="text" class="form-control" id="dogName" name="dogName"  placeholder="강아지 이름" >&emsp;
+        <input type="text" class="form-control" id="dogType" name="dogType" placeholder="강아지 견종">&emsp; 
+            <input type="button" class="btn btn-secondary" id="btnAdd"  value="+" style="height: 40px;">&nbsp;
+            <input type="button" class="btn btn-secondary" id="btnDel"  value="-" style="height: 40px;">
+    </div>
+    
+    <!-- 개안정보체크박스 -->
+    <div class="infoAd" >
+        <input type="checkbox" name="infoCheck"  required> (필수) 개인정보 처리 방침에 동의 합니다.<br>
+      	<input type="checkbox" name="adCheck" > (선택) 광고성 메일을 수신합니다.
+	</div>
+    
+    <!-- 회원가입, 취소, 다시작성 버튼 묶음 -->  
+	<br>
+	<div class="button3">
+		<input type="button" class="btn btn-secondary" id="btn-save" value="회원가입">&nbsp;
+        <input type="button" class="btn btn-secondary" id="memBack" value="취소">&nbsp;
+        <input type="reset" class="btn btn-secondary" id="memReset" value="다시작성">
+    </div>    
+  </form>
+</div>
+
+<script src="http://code.jquery.com/jquery-latest.js"></script> 
+<script src="/js/user.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+	</body>
+
+</html>

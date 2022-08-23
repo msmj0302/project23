@@ -1,0 +1,30 @@
+server:
+  port: 8087
+  
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cart_db
+    username: root
+    password: my1234
+  thymeleaf:
+    prefix: classpath:/templates/
+  
+  jpa:
+    hibernate:
+      ddl-auto: update #create update none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true    
+    
+mybatis:  
+  configuration:    
+   multiple-result-sets-enabled: false    
+   map-underscore-to-camel-case: true    
+   call-setters-on-nulls: true        
+   jdbc-type-for-null: varchar    
+   default-fetch-size: 500  
+  mapper-locations:  
+  - classpath:mapper/**/*.xml
+  
+  

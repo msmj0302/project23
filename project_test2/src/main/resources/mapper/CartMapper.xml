@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.keduit.project02.mapper.CartMapper">
+	<select id="cartList" resultType="com.keduit.project02.domain.CartVO">
+		SELECT *
+		FROM cartTBL
+		where userName ='ukfgd'
+	    
+	</select>
+	
+	<delete id="remove">
+      delete from cartTBL where cno = 2
+    </delete>
+    
+    
+    <!-- criteria 를 적용한 게시판 페이징 조회 -->
+	<select id="listCriteria" resultType="com.keduit.project02.domain.CartVO">
+		<![CDATA[
+		select
+		    themeName, bookingdatetime, price
+		from
+		    cartTBL
+		where userName ='ukfgd'
+		order by bookingdatetime asc
+		limit #{pageStart}, #{perPageNum}
+		]]>
+	</select>
+    
+</mapper>
