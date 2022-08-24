@@ -51,6 +51,9 @@ public class CartVO {
 	@Column(nullable = true, length = 20)
 	private String people;
 	
+	@Column(nullable = true, length = 20)
+	private int dogNum;
+	
 	
 	@Column(nullable = false, length = 50)
 	@DateTimeFormat(pattern = "yyyy-M-dd")

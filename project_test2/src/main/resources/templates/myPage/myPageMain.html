@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+ <th:block th:fragment="content"/> 
+ <th:block th:replace="~{/fragment/header::setContent(~{this::content}) }"/> 
+<head>
+ <title>마이페이지</title>
+ 
+ </head>
+ <body><br><br>
+ 
+  <div class="myPage" style="display: flex; justify-content: center;">
+    <img src="/images/identification-card.png" alt="myphoto1" style=" width: 60px; height :60px; " >&nbsp;&nbsp;&nbsp;
+   <p style="margin-top: 13px;" th:text="${user.getUsername()} + ' 님  환영합니다!'"> </p> 
+ </div><br>
+   <div class="btn" style="display:block;">
+          <button class="btn btn-secondary" id="Btn" type="submit" value="submit" style="width: 280px;" onclick="location.href='infoChange'">정보변경</button>&nbsp;
+          <button class="btn btn-secondary" id="Btn" type="submit" value="submit" style="width: 280px;" onclick="location.href='myPoint'">포인트</button>&nbsp;<br><br>
+          <button class="btn btn-secondary" id="Btn" type="submit" value="submit" style="width: 280px;" onclick="location.href='bookingList'">예약내역</button>&nbsp;
+          <button class="btn btn-secondary" id="Btn" type="submit" value="submit" style="width: 280px;" onclick="location.href='myReview'">나의후기</button>&nbsp;<br><br>
+          <button class="btn btn-secondary" id="Btn" type="submit" value="submit" style="width: 280px;" onclick="location.href='#'">로그아웃</button>&nbsp;
+          <button class="btn btn-secondary" id="Btn" type="submit" value="submit" style="width: 280px;" onclick="location.href='withdrawal'">회원탈퇴</button>&nbsp;
+        </div><br><br>
+
+ <!-- footer -->
+   
+
+</body>
+<th:block th:replace="~{/fragment/footer::setContent(~{this::content}) }"/>
+</html>

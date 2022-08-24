@@ -76,6 +76,7 @@ public class CartService2 {
     	 bookingVo.setPrice(cartVo.getPrice());
     	 bookingVo.setBtype(cartVo.getBtype());
     	 bookingVo.setThemeName(cartVo.getThemeName());
+    	 bookingVo.setPrice(cartVo.getPrice());
     	 
     	 bookingRepository.save(bookingVo);
     	 deleteCart(cno);

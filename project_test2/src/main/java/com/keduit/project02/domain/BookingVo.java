@@ -47,13 +47,15 @@ public class BookingVo {
 	@Column(nullable = true, length = 20)
 	private String people;
 	
+	@Column(nullable = true)
+	private int dogNum;
 	
 	@Column(nullable = false, length = 50)
 	@DateTimeFormat(pattern = "yyyy-M-dd")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-M-dd", timezone = "Asia/Seoul")
     private LocalDate bookingDate; // 날짜
 	
-	@Column(nullable = false, length = 50)
+	@Column(nullable = false)
 	private int price;
 	
 	@Column(nullable = false, length = 50)

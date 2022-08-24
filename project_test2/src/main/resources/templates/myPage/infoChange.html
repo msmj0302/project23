@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+ <th:block th:fragment="content"/> 
+ <th:block th:replace="~{/fragment/header::setContent(~{this::content}) }"/> 
+<head>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/blog/">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+      <title>회원 정보변경</title>
+
+
+<style>
+
+ head{
+top: 0px; 
+}
+html,
+body {
+  width :100%;
+  height: 100%;
+}
+
+body {
+  display: inline-block;
+  align-items: center;
+  padding-top: auto;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+  
+ 
+}
+
+
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+  
+}
+
+.form-signin input[type="text"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.form-member{
+/* margin-top: 6% */
+/*  	position:absolute;
+    left:40%;
+    top:50%;
+    margin-left:-150px;
+    margin-top:-150px;   */
+    margin:25px auto;
+    width:700px;
+    
+}
+
+
+
+
+#loginBtn{
+width: 300px;
+height: 48px;
+}
+
+form .form-control{
+height: 40px;
+}
+
+form .form_box{
+margin-top: 15px;
+display: flex; 
+height: 40px;
+}  
+ 
+.button3{
+text-align: center;
+height: 40px;
+}
+label{
+width: 150px;
+}
+</style>
+</head>
+<body>
+
+<!-- 회원가입 양식 -->
+<div class="form-member">
+  <form>
+         <h1 class="h3 mb-3 fw-normal" style="text-align: center">내 정보 수정</h1>
+
+	<!-- id는 읽기 전용이며 id는 현재 로그인한 회원의 정보-->    
+    <div class="form_box">
+   	  <label for="userId">아이디</label>&emsp;
+   	  <!-- id부분에<%--  <%=getSession(“userId”)%> 이용해서 연결되는지 백단 연결후 확인필요 --%>-->
+      <input type="text" class="form-control" id="userId"  placeholder="*수정필요 id호출" readonly="true" >
+    </div>
+    
+    
+	<!-- 비밀번호 입력 및 확인 비밀번호가 조건에 만족하는지 확인에 따른 알림창 함수 필요 -->   
+	<div class="form_box">
+		<label for="userPw">현재 비밀번호</label>&emsp;
+		<input type="text" class="form-control" id="userPw" placeholder="*사용자의 비밀번호를 가져다 연결"style="width: 500px;">&emsp;
+      	<!-- 비밀번호가 일치하는 경우** 변경을 눌렀을경우 아래의 신규비밀번호 입력칸으로 넘어가게 설정 -->
+      	<input type="button" class="btn btn-secondary" id="pwChange" value="비밀번호 변경" style="width: 150px" >
+	</div>
+	
+	<!-- 신규비밀번호 입력란 id를 userPw로 쓰는것이 맞는지 확인필요 -->
+	<div class="form_box">
+		<label for="userPw">신규 비밀번호</label>&emsp;
+		<input type="text" class="form-control" id="userPw" placeholder="영문, 숫자, 특수기호를 조합한 10~20이내로 입력">
+	</div>
+    
+	<!-- email 수정  -->   
+    <div class="form_box" >
+    	<label for="email">이메일</label>&emsp;
+        <input type="text" class="form-control" id="email" name="userEmail" placeholder="이메일 입력" style="width: 330px;">&nbsp;@&nbsp;
+        <input type="text" class="form-control" id="emailAdd" name="userEmail" placeholder="ex) meongCity.com" style="width: 330px;">
+    </div>
+    
+	<!-- 전화번호 입력 폼 /함수설정해서 number받기 기존 전화번호 입력되어 가져오는것 마찬가지-->  
+    <div class="form_box">
+    	<label for="userTel">전화번호</label>&emsp;
+        <input type="text" class="form-control" id="tNumber1" name="userTel" size="1" maxlength="3" placeholder="010" oninput="changeTNumber1()" style="width: 220px;"> -
+        <input type="text" class="form-control" id="tNumber2" name="userTel" size="3" maxlength="4" placeholder="0000"  oninput="changeTNumber2()" style="width: 220px;"> -
+        <input type="text" class="form-control" id="tNumber3" name="userTel" size="3" maxlength="4" placeholder="0000"  oninput="changeTNumber3()" style="width: 220px;"> 
+    </div>
+    
+	<!-- 강아지 이름, 견종 ***+,_버튼을 각각 눌렀을때 입력창이 늘어나고 줄어드는 함수 설정할 필요 있음*** 그에 따른 id는 dog+i, dType+i-->  
+    <div class="form_box">
+    	<label for="userTel">우리 멍멍이</label>&emsp;
+        <input type="text" class="form-control" id="dog1" name="dogName"  placeholder="강아지 이름" style="width: 215px;">&emsp;
+        <input type="text" class="form-control" id="dType1" name="dogType" placeholder="강아지 견종" style="width: 215px;">&emsp; 
+            <input type="button" class="btn btn-secondary" id="btnAdd"  value="+" style="height: 40px;">&nbsp;
+             <input type="button" class="btn btn-secondary" id="btnDel"  value="-" style="height: 40px;">
+    </div>
+    
+    <!-- 회원가입, 취소, 다시작성 버튼 묶음 -->  
+	<br>
+	<div class="button3">
+		<input type="submit" class="btn btn-secondary" id="saveinfo" value="수정">&emsp;
+        <input type="button" class="btn btn-secondary" id="memBack" value="취소">
+    </div>    
+  </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+	</body>
+<th:block th:replace="~{/fragment/footer::setContent(~{this::content}) }"/>
+</html>
+
+
+
+    	

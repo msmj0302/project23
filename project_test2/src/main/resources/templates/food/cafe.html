@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+ <th:block th:fragment="content"/> 
+ <th:block th:replace="~{/fragment/header::setContent(~{this::content}) }"/> 
+
+<!-- 설명글 폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Sunflower&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<head>
+<style>
+.d-block w-100-img{
+  text-align: center;
+  display: center;
+}
+</style>
+<title>멍시티 카페</title>
+</head>
+<body>
+<div class="button" style="text-align : center;">
+   <a class="btn btn-sm btn-outline-secondary" href="#">매장설명</a>
+   <a class="btn btn-sm btn-outline-secondary" href="#" >이용후기</a><br><br>
+   
+</div>
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-interval="true" style="width :390px; height:500px; margin: 0 auto;">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="/images/cafe_an.png" width="390" height="500"class="d-block w-100" alt="멍시티 가든1">
+    </div>
+    <div class="carousel-item">
+      <img src="/images/cake-gb260ee4a2_1920.jpg" width="390" height="500" class="d-block w-100" alt="멍시티 카페2">
+    </div>
+    <div class="carousel-item">
+      <img src="/images/waffle-g6c7e2ad4a_1920.jpg" width="390" height="500" class="d-block w-100" alt="멍시티 카페3">
+    </div>
+    <div class="carousel-item">
+      <img src="/images/cake-gf0c986d1f_1920.jpg" width="390" height="500" class="d-block w-100" alt="멍시티 카페4">
+    </div>
+    <div class="carousel-item">
+      <img src="/images/strawberries-ge9043559e_1920.jpg" width="390" height="500" class="d-block w-100" alt="멍시티 카페5">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div><br>
+
+<div class="resContent" style="text-align : center;font-family: 'Gowun Dodum', sans-serif;">
+     <h3 style="font-size : 25px; font-size :bold; ">Meong Cafe</h3>
+     <p style="font-size: 16px;">우리 댕댕이와 함께하는 티타임은 어떠실까요?<br>
+      멍시티 카페에서는 강아지와 함께 디저트와 가벼운 음료를 즐길 수 있도록 준비되어 있습니다.<br>
+      여유로운 한 잔을 나의 가족과 즐겨보세요~<br>
+</div><br>
+
+
+
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+<th:block th:replace="~{/fragment/footer::setContent(~{this::content}) }"/>
+</html>

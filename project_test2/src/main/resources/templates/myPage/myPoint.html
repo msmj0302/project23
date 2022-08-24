@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+ <th:block th:fragment="content"/> 
+ <th:block th:replace="~{/fragment/header::setContent(~{this::content}) }"/> 
+<head>
+<title>나의 포인트</title>
+</head>
+<meta charset="UTF-8">
+<body>
+<div class="point" style="text-align: center; height: 200px; margin-top: 20px;">
+         <img src="/images/강아지발바닥.png" alt="My Image" width="40" height="40" ><br><br>
+          <hr style="border: solid 0.8px black; width: 725px; margin: 0 auto; "><br> 
+         <!--  포인트 불러와야 함 -->
+         <p>나의 포인트<br>2365p</p>
+         <br>
+        
+</div><br>
+        <!-- booking 테이블 불러와야 함 -->
+       <div class="style" style="text-align: center;">
+         <p style="font-size: 12px; word-spacing: 180px; margin: 0 aut0; ">번호&nbsp;예약내역&nbsp;예약일&nbsp;결제금액</p>
+        <input type="text" class="form-control"name="review" style="width:725px;height: 250px;margin:0 auto; border-width:thin; border-color: gray;">
+ </div> 
+    
+      
+        
+
+</body>
+<th:block th:replace="~{/fragment/footer::setContent(~{this::content}) }"/>
+</html>

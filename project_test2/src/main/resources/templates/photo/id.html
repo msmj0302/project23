@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+ <th:block th:fragment="content"/> 
+ <th:block th:replace="~{/fragment/header::setContent(~{this::content}) }"/> 
+<head>
+ <!--   <link rel="stylesheet" href="/resources/blog/index.css"> -->
+
+<!-- 폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Sunflower&display=swap" rel="stylesheet">
+
+<style>
+ body {
+  margin: 0;
+  
+} 
+
+.container1 {
+  width: 50%;
+  overflow: hidden;
+  place-items: center;
+  
+}
+.images {
+  width: 100%;
+  height: auto;
+}
+.images img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+ @media(min-width: 640px) {
+  .container1 {
+  /*  margin-left : 320px;
+   margin-right :280px; */
+   margin : 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    grid-auto-flow: row dense;
+  }
+  .imageFlex1 {
+    display: grid;
+    row-gap: 20px;
+  }
+  .imageFlex2 {
+    display: grid;
+    row-gap: 20px;
+  }
+  .imageFlex3 {
+    display: grid;
+    row-gap: 20px;
+  }
+}
+
+</style>
+</head>
+<body>
+ <div class="container1" >
+    <div class="images">
+      <div class="imageFlex1">
+        <img src="/images/id4.jpg">       
+        <img src="/images/id6.jpg">
+        <img src="/images/id9.jpg">
+      </div>
+    </div>
+    <div class="images">
+      <div class="imageFlex2">
+        <img src="/images/id1.jpg">
+        <img src="/images/id13.jpg">
+        <img src="/images/id5.jpg">
+    
+      </div>
+    </div>
+    <div class="images">
+      <div class="imageFlex3">
+        <img src="/images/id11.jpg">
+        <img src="/images/id14.jpg">
+        <img src="/images/id2.jpg">
+       
+      </div>
+    </div>
+  </div>
+ 
+  <div class="content" style="text-align : center;font-family: 'Gowun Dodum', sans-serif;">
+   <p style="font-size : 25px;font-weight: bold;">Meong Studio</p>
+   <p style="font-size: 16px;">1. 촬영은 기본 30,000원부터 시작해 사이즈별로 추가 요금이 나올 수 있습니다.<br><br>
+    2. 액자의 기본 가격은 15,000원으로 크기에 따라 추가 요금이 나올 수 있습니다.</p><br>
+   <a class="btn btn-sm btn-outline-secondary" href="/reservation/photo/idreserPage.html">예약하기</a><br>
+  </div><br>
+   
+ 
+  <!-- Custom styles for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
+    <!-- Custom styles for this template -->
+
+</body>
+<th:block th:replace="~{/fragment/footer::setContent(~{this::content}) }"/>
+</html>

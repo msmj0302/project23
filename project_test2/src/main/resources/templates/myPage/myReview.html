@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+ <th:block th:fragment="content"/> 
+ <th:block th:replace="~{/fragment/header::setContent(~{this::content}) }"/> 
+<head>
+<title>나의 후기</title>
+<style>
+.star_rating {
+	font-size: 0;
+	letter-spacing: -4px;
+}
+
+.star_rating a {
+	font-size: 22px;
+	letter-spacing: 0;
+	display: inline-block;
+	margin-left: 5px;
+	color: #ccc;
+	text-decoration: none;
+}
+
+.star_rating a:first-child {
+	margin-left: 0;
+}
+
+.star_rating a.on {
+	color: gold;
+}
+</style>
+</head>
+<meta charset="UTF-8">
+<body>
+<div class="mybooking" style="height: 38px; display: flex; justify-content: center; ">
+         <img src="/images/강아지발바닥.png" alt="My Image" width="40" height="40" >&nbsp;&nbsp;&nbsp;
+        <a href="#" style="color: black;">작성 가능한 후기 | </a> <a href="#" style="color: black;">나의 후기</a>&nbsp;&nbsp;&nbsp;
+         <img src="/images/강아지발바닥.png" alt="My Image" width="40" height="40" >
+         
+</div>
+     <!-- review 테이블 -->
+ <div class="style" style="text-align: center;">
+      <br><hr style="border: solid 0.8px black; width: 725px; margin: 0 auto;"><br><br>
+      <p style="font-size: 12px; word-spacing: 180px; margin:0 auto; ">번호&nbsp;후기작성내용&nbsp;작성일&nbsp;별점</p>
+        <!-- <input type="text" class="form-control"name="review" style="width:725px;height: 250px; margin: 0 auto; border-width:thin; border-color: gray;"> -->
+        <div class="card">
+		<div class="card-header">나의 후기</div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>후기</th>
+					<th>별점</th>
+					<th>작성자</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr id="review-box" th:each="review : ${reviews}">
+              		<!-- <input type="hidden" value="rno"/> -->
+					<td id="review-${review.getRno()}"><span
+						th:text="${review.getContent()}"></span></td>
+					<td><p class="star_rating">
+							<a th:if="${review.getScope() != 0}" class="on"
+								th:each="num : ${#numbers.sequence(0, review.getScope()-1)}">★</a>
+						</p></td>
+					<td>
+						<span th:text="${review.getUsername()}"></span>
+				<form th:action="@{/myPage/myReview/{rno}(rno=${review.rno})}" method="post">
+						<button id="btn-delete" class="btn btn-danger">삭제</button>
+				</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<a href="/myPage/review">후기작성</a>
+		<ul class="pagination justify-content-center">
+			<th:block th:if="${reviews.first == true}">
+				<li class="page-item disabled"><a class="page-link"
+					th:href="@{/myPage/myReview/(page=${reviews.number-1})}">Previous</a></li>
+			</th:block>
+			<th:block th:unless="${reviews.first == true}">
+				<li class="page-item"><a class="page-link"
+					th:href="@{/myPage/myReview/(page=${reviews.number-1})}">Previous</a></li>
+			</th:block>
+			<th:block th:if="${reviews.last == true}">
+				<li class="page-item disabled"><a class="page-link"
+					th:href="@{/myPage/myReview/(page=${reviews.number+1})}">Next</a></li>
+			</th:block>
+			<th:block th:unless="${reviews.last == true}">
+				<li class="page-item"><a class="page-link"
+					th:href="@{/myPage/myReview/(page=${reviews.number+1})}">Next</a></li>
+			</th:block>
+		</ul>
+	</div>
+ </div>       
+</body>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<th:block th:replace="~{/fragment/footer::setContent(~{this::content}) }"/>
+<script src="/js/review.js"></script>
+<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+</html>

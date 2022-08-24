@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <th:block th:fragment="content"/> 
+ <th:block th:replace="~{/fragment/header::setContent(~{this::content}) }"/> 
+<head>
+<title>후기 작성</title>
+<style type="text/css">
+/* component */
+.star-rating {
+	display: flex;
+	flex-direction: row-reverse;
+	font-size: 2.5em;
+	justify-content: space-around;
+	padding: 0 .2em;
+	text-align: center;
+	width: 5em;
+}
+
+.star-rating input {
+	display: none;
+}
+
+.star-rating :checked ~ label {
+	color: #f90;
+}
+
+.star-rating label:hover, .star-rating label:hover ~ label {
+	color: #fc0;
+}
+
+.star-rating label {
+	-webkit-text-fill-color: transparent;
+	/* Will override color (regardless of order) */
+	-webkit-text-stroke-width: 2.3px;
+	-webkit-text-stroke-color: #2b2a29;
+	cursor: pointer;
+}
+
+.star-rating :checked ~ label {
+	-webkit-text-fill-color: gold;
+}
+
+.star-rating label:hover, .star-rating label:hover ~ label {
+	-webkit-text-fill-color: #fff58c;
+}
+</style>
+</head>
+<meta charset="UTF-8">
+<body>
+	<br>
+	<div class="mybooking"
+		style="height: 40px; display: flex; justify-content: center;">
+		<img src="/images/강아지발바닥.png" alt="My Image" width="40"
+			height="40">&nbsp;&nbsp;
+		<p style="font-size: 22px; margin-top: 8px;">멍멍시티의 후기를 작성해주세요</p>
+		&nbsp;&nbsp; <img src="/images/강아지발바닥.png" alt="My Image"
+			width="40" height="40">
+	</div>
+	<br>
+
+	<hr style="border: solid 0.8px black; width: 725px; margin: 0 auto;">
+	<br>
+
+	<!-- 별점 -->
+	<span class="star-input">
+		<span class="star-rating space-x-4 mx-auto" id="scope" style="font-weight:initial; margin: 0 auto; height: 50px;">
+			<input type="radio" id="5-stars" name="scope" value="5"/>
+				<label for="5-stars" class="star" style="font-weight:normal;">★</label>
+			<input type="radio" id="4-stars" name="scope" value="4"/>
+				<label for="4-stars" class="star">★</label>
+			<input type="radio" id="3-stars" name="scope" value="3" />
+				<label for="3-stars" class="star">★</label>
+			<input type="radio" id="2-stars" name="scope" value="2" />
+				<label for="2-stars" class="star">★</label>
+			<input type="radio" id="1-stars" name="scope" value="1" />
+			<label for="1-stars" class="star">★</label>
+		</span>
+	</span>
+	<br>
+	<!-- 리뷰 테이블에서 불러와야 함 -->
+	<div class="content" style="display: flex; justify-content: center;">
+		<input type="text" class="form-control" name="review" id="picture"
+			style="width: 280px; height: 220px; border-color: gray;"
+			placeholder="예약한 사진들어가야함">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="text" class="form-control" name="review" id="content"
+			style="width: 280px; height: 220px; border-color: gray;"
+			placeholder="후기작성부분">
+	</div>
+	<br>
+	<br>
+	<div class="btn" style="display: flex; justify-content: center;">
+		<button id="btn-save" class="btn btn-primary" type="submit"
+			value="submit">등록</button>
+		&emsp;&emsp;&emsp;
+		<button id="btn-delete" class="btn btn-secondary" type="submit"
+			value="submit">삭제</button>
+	</div>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="/js/review.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+</body>
+ <th:block th:replace="~{/fragment/footer::setContent(~{this::content}) }"/> 
+</html>

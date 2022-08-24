@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+ <th:block th:fragment="content"/> 
+ <th:block th:replace="~{/fragment/header::setContent(~{this::content}) }"/> 
+<head>
+ <!--   <link rel="stylesheet" href="/resources/blog/index.css"> -->
+
+<!-- 설명글 폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap" rel="stylesheet">
+<style>
+ body {
+  margin: 0;
+  
+} 
+
+.container1 {
+  width: 50%;
+  overflow: hidden;
+  place-items: center;
+  
+}
+.imagess {
+  width: 100%;
+  height: auto;
+}
+.imagess img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+ @media(min-width: 640px) {
+  .container1 {
+    margin :0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    grid-auto-flow: row dense;
+  }
+  .imagesFlex1 {
+    display: grid;
+    row-gap: 20px;
+  }
+  .imagesFlex2 {
+    display: grid;
+    row-gap: 20px;
+  }
+  .imagesFlex3 {
+    display: grid;
+    row-gap: 20px;
+  }
+}
+
+</style>
+</head>
+<body>
+ <div class="container1" >
+    <div class="imagess">
+      <div class="imagesFlex1">
+        <img src="/images/concept1.jpg">       
+        <img src="/images/concept8.jpg">
+        <img src="/images/concept16.jpg">
+      </div>
+    </div>
+    <div class="imagess">
+      <div class="imagesFlex2">
+        <img src="/images/concept10.jpg">
+        <img src="/images/concept12.jpg">
+         <img src="/images/concept7.jpg">
+        <img src="/images/concept2.jpg">
+    
+      </div>
+    </div>
+    <div class="imagess">
+      <div class="imagesFlex3">
+        <img src="/images/concept11.jpg">
+        <img src="/images/concept15.jpg">
+        <img src="/images/concept4.jpg">
+       
+      </div>
+    </div>
+  </div>
+ 
+  <div class="content" style="text-align : center;font-family: 'Gowun Dodum', sans-serif; ">
+   <p style="font-size : 25px; font-weight: bold;">Concept Meong</p>
+   <p style="font-size: 16px;">1. 촬영은 기본 30,000원부터 시작해 사이즈 별로 추가 요금이 나올 수 있습니다.<br><br>
+      2. 액자의 기본 가격은 15,000원으로 크기에 따라 추가 요금이 나올 수 있습니다.</p><br>
+   <a class="btn btn-sm btn-outline-secondary" href="/reservation/photo/conreserPage.html">예약하기</a><br>
+  </div><br>
+   
+ 
+  <!-- Custom styles for this template -->
+    <!-- Custom styles for this template -->
+ 
+  <%@include file="../footer.jsp" %>
+  </body>
+</html>

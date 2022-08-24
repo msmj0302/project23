@@ -82,6 +82,11 @@
               예약내역관리
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin/adminPage4">
+              <span data-feather="shopping-cart">가격설정</span>
+            </a>
+          </li>
         </ul>
 
       </div>
@@ -89,7 +94,7 @@
 
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">예약내역 상세보기</h1>
+        <h1 class="h2">가격설정</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group me-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
@@ -101,70 +106,84 @@
           </button>
         </div>
       </div>
+	
+	  <form>	  
+		  <div>
+		  	<input type="hidden" id="pno" th:value="${priceDetail.getPno()}">
+		  	<h5>견생사진 기본가격</h5>
+		  	<div class="input-group">
+			  <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" th:value="${priceDetail.getConPrice()}" id="conPrice"></input>
+			  <span class="input-group-text">원</span>
+			</div>
+			<br>
+		  	<h5>증멍사진 기본가격</h5>
+		  	<div class="input-group">
+			  <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" th:value="${priceDetail.getIdPrice()}" id="idPrice"></input>
+			  <span class="input-group-text">원</span>
+			</div>
+			<br>
+		  	<h5>멍멍이와 함께 기본가격</h5>
+		  	<div class="input-group">
+			  <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" th:value="${priceDetail.getFamilyPrice()}" id="familyPrice"></input>
+			  <span class="input-group-text">원</span>
+			</div>
+			<br>
+		  	<h5>멍스파 기본가격</h5>
+		  	<div class="input-group">
+			  <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" th:value="${priceDetail.getSpaPrice()}" id="spaPrice"></input>
+			  <span class="input-group-text">원</span>
+			</div>
+			<br>
+		  	<h5>멍수영장 기본가격</h5>
+		  	<div class="input-group">
+			  <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" th:value="${priceDetail.getSwimPrice()}" id="swimPrice"></input>
+			  <span class="input-group-text">원</span>
+			</div>
+			<br>
+		  	<h5>애완견사이즈 옵션가격</h5>
+		  	<div class="input-group">
+			  <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" th:value="${priceDetail.getDogSizePrice()}" id="dogSizePrice"></input>
+			  <span class="input-group-text">원</span>
+			</div>
+			<br>
+		  	<h5>액자사이즈 옵션가격</h5>
+		  	<div class="input-group">
+			  <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" th:value="${priceDetail.getPictureSizePrice()}" id="pictureSizePrice"></input>
+			  <span class="input-group-text">원</span>
+			</div>
+			<br>
+		  	<h5>인원수 옵션가격</h5>
+		  	<div class="input-group">
+			  <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" th:value="${priceDetail.getPeopleNumPrice()}" id="peopleNumPrice"></input>
+			  <span class="input-group-text">원</span>
+			</div>
+			<br>
+		  	<h5>강아지 마리 수 옵션가격</h5>
+		  	<div class="input-group">
+			  <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)" th:value="${priceDetail.getDogNumPrice()}" id="dogNumPrice"></input>
+			  <span class="input-group-text">원</span>
+			</div>
+			<br>
+		  </div>
+			<br>
+			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+			&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+			
+     		 <button type="button" class="btn btn-primary" id="btn-update">가격 변경하기</button>
+		  	<br><br><br><br><br>
+	  </form>
 	  
-	  <div>
-	  	
-		
-	  	<h5>예약번호</h5>
-	  	<ul class="list-group">
-		  <li class="list-group-item" th:text="${bookingDetail.getBno()}">An item</li>
-		</ul>
-		<br>
-	  	<h5>카테고리</h5>
-	  	<ul class="list-group">
-		  <li class="list-group-item" th:text="${bookingDetail.getBtype()}">An item</li>
-		</ul>
-		<br>
-	  	<h5>상품명</h5>
-	  	<ul class="list-group">
-		  <li class="list-group-item" th:text="${bookingDetail.getThemeName()}">An item</li>
-		</ul>
-		<br>
-	  	<h5>고객아이디</h5>
-	  	<ul class="list-group">
-		  <li class="list-group-item" th:text="${bookingDetail.getUsername()}">An item</li>
-		</ul>
-		<br>
-	  	<h5>고객명</h5>
-	  	<ul class="list-group">
-		  <li class="list-group-item" th:text="${bookingDetail.getName()}">An item</li>
-		</ul>
-		<br>
-	  	<h5>애완견 사이즈</h5>
-	  	<!-- th:if="${not #strings.isEmpty(user.id)}" -->
-	  	<ul class="list-group">
-		  <li class="list-group-item" th:text="${bookingDetail.getDogSize()}"></li>
-		</ul>
-		<br>
-	  	<h5>액자 사이즈</h5>
-	  	<ul class="list-group">
-		  <li class="list-group-item" th:text="${bookingDetail.getPictureSize()}"></li>
-		</ul>
-		<br>
-	  	<h5>인원수</h5>
-	  	<ul class="list-group">
-		  <li class="list-group-item" th:text="${bookingDetail.getPeople()}"></li>
-		</ul>
-		<br>
-	  	<h5>예약날짜</h5>
-	  	<ul class="list-group">
-		  <li class="list-group-item" th:text="${bookingDetail.getBookingDate()}"></li>
-		</ul>
-		<br>
-	  	<h5>예약비</h5>
-	  	<ul class="list-group">
-		  <li class="list-group-item" th:text="${bookingDetail.getPrice()}"></li>
-		</ul>
-	  </div>
 	  
     </main>
   </div>
 </div>
 
 
-	<!-- <script src="/js/admin.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script><script src="dashboard.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="/js/admin.js"></script> 
   </body>
 </html>
 

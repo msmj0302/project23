@@ -27,9 +27,11 @@ width: 30px; height: 25px;
 text-align: center;
 font-size: 15px;
 margin: auto 0;
+margin-left: 15px;
 }
+
 .bookingPhoto>img{
-width: 120px; height: 145px;
+width: 120px; height: 130px;
 }
 
 .bookinginfo{
@@ -40,7 +42,8 @@ margin-top: auto;
 /*border: solid 1px blue; 테스트용 */
 list-style:none;
 padding-left: 0px;
-margin-bottom: 0;
+margin-bottom: 3px;
+margin-left: 20px;
 } 
 .bookinginfo li{
 /*border: solid 1px pink; 테스트용*/
@@ -50,9 +53,10 @@ font-size: 15px;
 .bookingPrice{
 margin-top: auto;
 margin-left: auto;
-margin-right: 10px;
+margin-right: 25px;
 font-size: 15px;
 float: right;
+
 }
 
 
@@ -112,17 +116,20 @@ margin: 0 auto;
 
 <!-- 예약내역 한개의 모든 내용을 담는 박스 변수를 이용해서
 예약내역이 여러개일 경우 아래 박스가 복제되어 늘어나도록 해야함 -->
+	
 	<div class="allCheckBox" style="width: 700px;margin: 0 auto;">
-	<input type="checkbox" id="allCheck" name="allCheck" style="text-align: left; margin-left: 2px; width: 32px; height: 32px;">
-	</div>
+	<input type="checkbox" id="allResult" name="allCheck" style="text-align: left; margin-left: 2px; width: 32px; height: 32px;" >
+	<span class="cartDivision" style="width: 700px; margin: auto; text-align: center; ">&nbsp;No.&emsp;&emsp;테마사진&emsp;&nbsp;&emsp;담긴정보&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;금 액</span></div>
+
+
 <div class="allContent"  th:each="cartList,listStat: ${cartList}">
 	
 	
    <div class="cartlist">
       <!-- 원하는 상품 선택하는 체크박스 -->
       <div class="wantSelect">
-         <input type="checkbox" name="rowCheck" th:value="${cartList.getCno()}">
-         <span th:text="${cartList.getCno()}">테스트</span>
+         <input type="checkbox" name="rowCheck" onclick="getCheckedCnt()" >
+         <span th:text="${cartList.getCno()}" style="margin: 0 15px;">예약번호</span>
       </div>
       
  <!-- 메모장 내용이 들어갈 곳  -->     
@@ -169,7 +176,7 @@ margin: 0 auto;
  
 <!-- 예약개수와 총 금액 표기란 -->
 <div class="totalPri" style=" margin: 0 auto; text-align:center;">
-   <span style="text-align:left; font-size: 20px; width: 340px;  display:inline-block;" th:text="'총 '+${( 'div' ).length}+'건'"></span>
+   <span id='result' style="text-align:left; font-size: 20px; width: 340px;  display:inline-block;"></span>
    <span style="text-align:right; font-size: 20px; width: 340px; display:inline-block;">합계:price원</span> 
 </div>
 
@@ -177,9 +184,7 @@ margin: 0 auto;
 <div class="cartBtn">
   <button class="btn btn-danger" type="button" id="booking" name="booking" style="width:500px; margin: 0 auto 0 0;" onclick="saveValue()">예약하기</button>
   <button class="btn btn-secondary del" type="button" id="bookingDel" name="bookingDel" style="width:150px; margin: 0 0 0 auto;" onclick="deleteValue()">삭제하기</button>
-</div>
-
-
+ </div>
 </body>
 <th:block th:replace="~{/fragment/footer::setContent(~{this::content}) }"/>
 
@@ -187,7 +192,27 @@ margin: 0 auto;
 <!-- 스크립트 -->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
-/* 삭제버튼  */
+
+function getCheckedCnt()  {
+	  // 선택된 목록 가져오기
+	  const query = 'input[name="rowCheck"]:checked';
+	  const selectedElements = 
+	      document.querySelectorAll(query);
+	  
+	  // 선택된 목록의 갯수 세기
+	  const selectedElementsCnt =
+	        selectedElements.length;
+	  
+	  
+	  // 출력
+	  document.getElementById('result').innerText
+	    = selectedElementsCnt;
+		}
+
+
+
+
+/* 일괄체크 박스  */
 $(function(){
 	var chkObj = document.getElementsByName("rowCheck");
 	var rowCnt = chkObj.length;
@@ -198,18 +223,19 @@ $(function(){
 			chk_listArr[i].checked = this.checked;
 		}
 	});
-	
+	/* 개별체크 박스 */	
 	$("input[name='rowCheck']").click(function(){
 		if($("input[name='rowCheck']:checked").length == rowCnt){
-			$("input[name='allCheck']")[0].checked = true;
+			$("input[name='allCheck']")[0].checked == true;
 		}
 		else{
-			$("input[name='allCheck']")[0].checked = false;
+			$("input[name='allCheck']")[0].checked == false;
 		}
 	});
 });
 
 
+/* 예약하기 버튼 처리 */	
 function saveValue(){
 	var valueArr = new Array();
 	$("input:checkbox[name=rowCheck]:checked").each(function(i,iVal) {
@@ -241,7 +267,7 @@ function saveValue(){
 	}
 }
 
-
+/* 삭제하기 버튼 처리 */	
 function deleteValue(){
 	var valueArr = new Array();
 	$("input:checkbox[name=rowCheck]:checked").each(function(i,iVal) {
@@ -261,7 +287,7 @@ function deleteValue(){
 				valueArr : valueArr //보내고자 하는 data 변수 설정
 			},
 			success: function(jdata){
-				if(jdata = 1){
+				if(jdata == 1){
 					alert("삭제 성공");
 					location.replace("cartList") //list로 페이지 새로고침
 				}
@@ -272,7 +298,8 @@ function deleteValue(){
 		});
 	}
 }
-/* 이미지관련 */
+
+/* 테마 관련 이미지 띄우기 */
  	window.onload=function(){
     var themeNames  = new Array();
 	
@@ -284,6 +311,7 @@ function deleteValue(){
     $("[id^='title']").each(function() {
    	
     for(var i=0; i<themeNames.length; i++){
+
         if(themeNames[i] == '견생사진') {
         	$(this).attr('src','../images/concept15.jpg');
 

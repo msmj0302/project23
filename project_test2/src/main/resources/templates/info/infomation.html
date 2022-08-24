@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+ <th:block th:fragment="content"/> 
+ <th:block th:replace="~{/fragment/header::setContent(~{this::content}) }"/> 
+<head>
+
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+<div  style="margin: 0 auto; text-align: center;">
+<img src="/images/city_an.jpg" alt="My Image" width="600" height="800" >
+</div>
+
+
+
+
+<!-- Custom styles for this template -->
+ 
+ </body>
+<th:block th:replace="~{/fragment/footer::setContent(~{this::content}) }"/>
+
+</html>
