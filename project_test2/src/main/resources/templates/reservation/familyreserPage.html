@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+ <th:block th:fragment="content"/> 
+ <th:block th:replace="~{/fragment/header::setContent(~{this::content}) }"/> 
 <head>
 <meta charset="UTF-8">
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -16,7 +18,7 @@
 <br>
 <div style=" display: flex; justify-content:center;">
 <div class="form_box" style=" display:flex;height: 480px;" >
-     <img src="/resources/images/with dog16.jpg" alt="My Image" width="400" height="570" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     <img src="/images/with dog16.jpg" alt="My Image" width="400" height="570" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <section>
     
   <h1 style="font-size: 30px; font-weight: bold; ">멍멍이와 함께</h1> 
@@ -125,5 +127,7 @@ function disableAllTheseDays(date) {
 </script>
 <script src="/js/booking.js"></script>
 
+
 </body>
+<th:block th:replace="~{/fragment/footer::setContent(~{this::content}) }"/>
 </html>

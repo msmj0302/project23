@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.keduit.project02.mapper.ReserMapper">
+
+    <!-- 예약 목록 -->
+    <select id="reserList" resultType="com.keduit.project02.domain.BookingVo" >
+      select bno ,username,themeName,bookingDate,price from booking where username = #{username}
+     
+    </select>
+     
+     <!-- 페이징 예약 목록 -->
+ <!--    <select id="listCriteria" resultType="com.keduit.project02.domain.BookingVo">
+    <![CDATA[
+     select bno,themeName,bookingDate,price 
+     from booking
+     where username = #{username}
+     order by bno ASC , bookingDate ASC
+     limit #{pageStart} ,#{perPageNum}   
+    ]]>
+    
+    
+    </select>
+    
+    <select id="listCountCriteria" resultType="int">
+     select count(*) from booking where username = #{username}
+    </select> -->
+    
+</mapper>

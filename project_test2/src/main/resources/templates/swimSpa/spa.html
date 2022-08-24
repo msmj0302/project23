@@ -177,19 +177,19 @@
 		<ul class="pagination justify-content-center">
 			<th:block th:if="${reviews.first == true}">
 				<li class="page-item disabled"><a class="page-link"
-					th:href="@{/spa/(page=${reviews.number-1})}">Previous</a></li>
+					th:href="@{/swimSpa/spa/(page=${reviews.number-1})}">Previous</a></li>
 			</th:block>
 			<th:block th:unless="${reviews.first == true}">
 				<li class="page-item"><a class="page-link"
-					th:href="@{/spa/(page=${reviews.number-1})}">Previous</a></li>
+					th:href="@{/swimSpa/spa/(page=${reviews.number-1})}">Previous</a></li>
 			</th:block>
 			<th:block th:if="${reviews.last == true}">
 				<li class="page-item disabled"><a class="page-link"
-					th:href="@{/spa/(page=${reviews.number+1})}">Next</a></li>
+					th:href="@{/swimSpa/spa/(page=${reviews.number+1})}">Next</a></li>
 			</th:block>
 			<th:block th:unless="${reviews.last == true}">
 				<li class="page-item"><a class="page-link"
-					th:href="@{/spa/(page=${reviews.number+1})}">Next</a></li>
+					th:href="@{/swimSpa/spa/(page=${reviews.number+1})}">Next</a></li>
 			</th:block>
 		</ul>
 	</div>
